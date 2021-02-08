@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tp 19</title>
+</head>
+<body>
+    <h1>CARNET D'ADRESSE</h1>
+    <p>Nom et Prenom : </p>
+    <input type="text" name="name" id='name'>
+    <p>Adresse email : </p>
+    <input type="email" name="email" id="email"><br><br>
+    <button id="ajouter">Ajouter</button>
+    <button id="supprimer">Supprimer</button>
+    <button id="adresse">Retrouver adresse mail</button><br><br>
+    <select name="contact-list" id="contact-list" size="3" style="min-width: 240px;">
+    </select>
+    <script>
+        //btns declaration
+        var ajouter = document.getElementById('ajouter')
+        var supprimer = document.getElementById('supprimer')
+        var adresse = document.getElementById('adresse')
+        //get selected option func
+        const getSelectedOption = (sel) =>{
+            var opt;
+            for ( var i = 0, len = sel.options.length; i < len; i++ ) {
+                opt = sel.options[i];
+                if ( opt.selected === true ) {
+                    break;
+                }
+            }
+            return opt;
+        }
+
+        //btns event
+
+        //add
+        ajouter.addEventListener('click',()=>{
+            let contact_list = document.getElementById("contact-list");
+            let opt = document.createElement("option");
+            let name = document.getElementById("name").value
+            let email = document.getElementById("email").value
+            opt.appendChild(document.createTextNode(name));
+            opt.value = email;
+            v=true
+            for (i = 0; i < contact_list.length; ++i){
+                if ((contact_list.options[i].value == email) || (contact_list.options[i].innerHTML == name)){
+                    v=false
+                }
+            }
+            
+            v?contact_list.appendChild(opt):alert('existe deja')
+            
+        })
+        //find
+        adresse.addEventListener('click',()=> {
+            let contact_list = document.getElementById("contact-list")
+            var opt = getSelectedOption(contact_list);
+            alert(opt.value)
+        })
+        //delete
+        supprimer.addEventListener('click',()=>{
+            let contact_list = document.getElementById("contact-list")
+            var child = getSelectedOption(contact_list);
+            contact_list.removeChild(child)
+        })
+    </script>
+</body>
+</html>
