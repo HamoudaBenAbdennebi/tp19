@@ -44,7 +44,7 @@
             let email = document.getElementById("email").value
             opt.appendChild(document.createTextNode(name));
             opt.value = email;
-            v=true
+            let v=true
             for (i = 0; i < contact_list.length; ++i){
                 if ((contact_list.options[i].value == email) || (contact_list.options[i].innerHTML == name)){
                     v=false
